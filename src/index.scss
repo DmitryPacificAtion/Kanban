@@ -1,6 +1,122 @@
+@font-face {
+  font-family: Montserrat;
+  src: url("./assets/Montserrat-Regular.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("./assets/Montserrat-Bold.ttf");
+  font-style: normal;
+  font-weight: 600;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #b5b5b5;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.8;
+}
+::-webkit-scrollbar-thumb:active {
+  opacity: 0.6;
+}
+::-webkit-scrollbar-track {
+  background: #535353;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  opacity: 0.8;
+}
+::-webkit-scrollbar-track:active {
+  opacity: 0.6;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 body {
   margin: 0;
-  padding: 20px;
-  background: url("./assets/background.jpg");
+}
+.columns-wrapper {
+  background: url("./assets/background.jpg") no-repeat 100%;
   background-size: cover;
+  height: 763px;
+  padding: 20px;
+  font-family: Montserrat;
+  z-index: 1;
+}
+.column {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #dfe3e6;
+  border-radius: 3px;
+  padding: 8px 12px;
+  width: 272px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &__title {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 146%;
+    color: #111111;
+    margin-bottom: 12px;
+  }
+}
+.notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 657px; // x - 106px
+  overflow-x: auto;
+  li {
+    background-color: #fff;
+    box-shadow: 0px 1px 4px rgba(9, 45, 66, 0.25);
+    border-radius: 3px;
+    margin-bottom: 8px;
+    width: auto;
+    padding: 8px 12px;
+  }
+}
+
+.add-item {
+  padding: 8px 35px;
+  width: 100%;
+  background-color: #dfe3e6;
+  position: relative;
+  color: #6b808c;
+  font-family: Montserrat;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  line-height: 146%;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(9, 30, 66, 0.08);
+    color: #172b4d;
+  }
+  &:active {
+    background-color: rgba(9, 30, 66, 0.13);
+  }
+  &::before {
+    content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNC4xNDEyIDYuNjQxMjJIOC4zNTg3OFYwLjg1ODc3OUM4LjM1ODc4IDAuNDAwNzYzIDcuOTU4MDIgMCA3LjUgMEM3LjA0MTk4IDAgNi42NDEyMiAwLjQwMDc2MyA2LjY0MTIyIDAuODU4Nzc5VjYuNjQxMjJIMC44NTg3NzlDMC40MDA3NjMgNi42NDEyMiAwIDcuMDQxOTggMCA3LjVDMCA3Ljk1ODAxIDAuNDAwNzYzIDguMzU4NzggMC44NTg3NzkgOC4zNTg3OEg2LjY0MTIyVjE0LjE0MTJDNi42NDEyMiAxNC41OTkyIDcuMDQxOTggMTUgNy41IDE1QzcuOTU4MDIgMTUgOC4zNTg3OCAxNC41OTkyIDguMzU4NzggMTQuMTQxMlY4LjM1ODc4SDE0LjE0MTJDMTQuNTk5MiA4LjM1ODc4IDE1IDcuOTU4MDEgMTUgNy41QzE1IDcuMDQxOTggMTQuNTk5MiA2LjY0MTIyIDE0LjE0MTIgNi42NDEyMloiIGZpbGw9IiM2QjgwOEMiLz4gPC9zdmc+");
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+  }
 }
