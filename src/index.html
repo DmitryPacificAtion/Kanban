@@ -8,7 +8,7 @@
     <div class="columns-wrapper">
       <section class="column">
         <div class="column__title">План на месяц</div>
-        <ul class="notes">
+        <ul class="column__notes">
           <li>Пройти курс по React</li>
           <li>Отметить день рождения</li>
           <li>
@@ -26,7 +26,34 @@
           </li>
           <li>Нет, я серьезный человек, иду в мотошколу. Записываюсь!</li>
         </ul>
-        <button class="add-item">Добавить еще одну карточку</button>
+        <button class="column__add-item">Добавить еще одну карточку</button>
+      </section>
+      <section class="column">
+        <div class="column__title">План на месяц</div>
+        <ul class="column__notes">
+          <li>Пройти курс по React</li>
+          <li>Собрать портфолио</li>
+          <li>Нет, я серьезный человек, иду в мотошколу. Записываюсь!</li>
+        </ul>
+        <textarea
+          placeholder="Введите название карточки"
+          class="new-column__input"
+          rows="3"
+        ></textarea>
+        <div class="new-column__controls">
+          <button class="new-column__create">Добавить карточку</button>
+          <div class="new-column__cancel"></div>
+        </div>
+      </section>
+      <section class="new-column">
+        <input type="text" placeholder="Введите название колонки" class="new-column__input" />
+        <div class="new-column__controls">
+          <button class="new-column__create">Добавить колонку</button>
+          <div class="new-column__cancel"></div>
+        </div>
+      </section>
+      <section class="column">
+        <button class="column__add-item" onclick="addColumn">Добавить еще одну колонку</button>
       </section>
     </div>
   </body>
