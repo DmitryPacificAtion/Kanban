@@ -36,15 +36,35 @@ function createNewColumn() {
   return column;
 }
 
-function createColumn(id_col, title, notes, mode) {
+function createRemove(id) {
+  const remove = document.createElement('div');
+  remove.classList.add('remove');
+  const removeHandler = id => {
+    document.getElementById(id).remove();
+  };
+  remove.setAttribute('id', id);
+  remove.addEventListener("click", () => removeHandler(id));
+  
+  return remove;
+}
+
+function createColumn(id_col, title, notes) {
   const column = document.createElement("section");
   column.classList.add("column");
+  column.setAttribute("id", `column-${id_col}`);
 
+  const header = document.createElement('div');
+  header.classList.add('column__title');
+  header.innerText = title;
+  header.appendChild(createRemove(`column-${id_col}`));
+  
   const ul = document.createElement("ul");
   ul.classList.add("column__notes");
 
   notes.forEach(({ id_note, content }) => {
     const li = document.createElement("li");
+    li.setAttribute('id', `note-${id_note}`);
+
     const input = document.createElement("input");
     input.setAttribute("type", "text");
     input.setAttribute("value", content);
@@ -63,30 +83,41 @@ function createColumn(id_col, title, notes, mode) {
   
   const button = document.createElement("button");
   const addButtonHandler = () => {
-    console.log("Button has clicked", mode);
+    button.remove();
+    column.appendChild(wrapper);
   };
   button.classList.add("column__add-item");
-  // button.classList.toggle("none", !mode);
 
   button.setAttribute("id", `add-card-${id_col}`);
   button.addEventListener("click", addButtonHandler);
   button.innerText = "Добавить еще одну карточку";
 
-  column.insertAdjacentHTML("afterbegin", `<div class="column__title">${title}</div>`);
+  column.appendChild(header);
   column.appendChild(ul);
 
-  column.appendChild(button);
-
-  column.appendChild(textarea);
+  const wrapper = document.createElement('div');
+  wrapper.setAttribute("id", `controls-wrapper-${id_col}`);
+  wrapper.appendChild(textarea);
   renderColumnControls(
-    column,
+    wrapper,
     "Добавить карточку",
-    () => console.log('render'),
+    () => console.log('Save'),
     () => {
-      console.log('mode', mode != mode)
+      wrapper.remove();
+      column.appendChild(button);
      },
   );
- 
+
+  const el = document.getElementById(`add-card-${id_col}`);
+
+  if(el === null) {
+    wrapper.remove();
+    column.appendChild(button);
+  } else {
+    button.remove();
+    column.appendChild(wrapper);
+  }
+   
   return column;
 }
 
