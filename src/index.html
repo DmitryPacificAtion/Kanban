@@ -3,58 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no" />
   </head>
-
   <body>
-    <div class="columns-wrapper">
-      <section class="column">
-        <div class="column__title">План на месяц</div>
-        <ul class="column__notes">
-          <li>Пройти курс по React</li>
-          <li>Отметить день рождения</li>
-          <li>
-            Записаться на курсы английского языка, чтобы уехать жить в Лондон
-          </li>
-          <li>Сделать бекенд своего сайта на node.js</li>
-          <li>Собрать портфолио</li>
-          <li>Собрать портфолио</li>
-          <li>Собрать портфолио</li>
-          <li>Написать первую статью в блог</li>
-          <li>
-            Записаться в мотошколу. Хотя немного страшновато, конечно. Друзья и родители против, но
-            очень хочется. Но кого я обманываю, уже 2 года решаюсь на этот шаг 😢 Еще и друзья будут
-            хрустиком называть. В общем, хотя бы подумать над этим.
-          </li>
-          <li>Нет, я серьезный человек, иду в мотошколу. Записываюсь!</li>
-        </ul>
-        <button class="column__add-item">Добавить еще одну карточку</button>
-      </section>
-      <section class="column">
-        <div class="column__title">План на месяц</div>
-        <ul class="column__notes">
-          <li>Пройти курс по React</li>
-          <li>Собрать портфолио</li>
-          <li>Нет, я серьезный человек, иду в мотошколу. Записываюсь!</li>
-        </ul>
-        <textarea
-          placeholder="Введите название карточки"
-          class="new-column__input"
-          rows="3"
-        ></textarea>
-        <div class="new-column__controls">
-          <button class="new-column__create">Добавить карточку</button>
-          <div class="new-column__cancel"></div>
-        </div>
-      </section>
-      <section class="new-column">
-        <input type="text" placeholder="Введите название колонки" class="new-column__input" />
-        <div class="new-column__controls">
-          <button class="new-column__create">Добавить колонку</button>
-          <div class="new-column__cancel"></div>
-        </div>
-      </section>
-      <section class="column">
-        <button class="column__add-item" onclick="addColumn">Добавить еще одну колонку</button>
-      </section>
-    </div>
+    <div class="columns-wrapper" id="root"></div>
   </body>
 </html>
