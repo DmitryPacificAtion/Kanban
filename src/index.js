@@ -1,15 +1,17 @@
 import "./index.scss";
 
-import { renderAddMoreColumn, renderColumn } from "./renders";
+import { renderAddMoreColumn, renderColumns } from "./renders";
 
 (function () {
-  renderColumn();
+  renderColumns();
   renderAddMoreColumn();
 })();
 
-// Save to storage
-// Load from storage
-// Create hash from string
+// + - Handle Enter
+// + - Handle Esc
+// - Validate empty strings
+// - Edit Title
+// Fix a bug with 2 colums
 
 // window.addEventListener('resize', resizeHandler);
 // function resizeHandler () {

@@ -1,18 +1,11 @@
-import mockedData from "./mockedData.json";
 import { createColumn, createNewColumn, createAddMoreColumn, createColumnControls } from "./createators";
+import { loadFromStorage } from './utilities';
 
 const root = document.getElementById("root");
 
-const MODE = {
-  READ: true,
-  WRITE: false,
-};
-
-
-let lastOrer = 0;
-function renderColum() {
-  mockedData.forEach(({ id_col, title, notes }) => {
-    // lastOrer = order > lastOrer ? order : lastOrer;
+function renderColumns() {
+  Object.values(document.querySelectorAll('.column')).forEach(item => item.remove());
+  loadFromStorage().forEach(({ id_col, title, notes }) => {
     root.appendChild(createColumn(id_col, title, notes));
   });
 }
@@ -34,4 +27,4 @@ function renderColumnControls(parent, label, primaryHandler, secondaryHandler) {
   parent.appendChild(createColumnControls(label, primaryHandler, secondaryHandler));
 }
 
-export { renderColum as renderColumn, renderNewColumn, renderAddMoreColumn, renderColumnControls };
+export { renderColumns, renderNewColumn, renderAddMoreColumn, renderColumnControls };
