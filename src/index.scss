@@ -45,6 +45,10 @@
 
 body {
   margin: 0;
+  background: url("./assets/background2.jpg") no-repeat 100%;
+  height: 980px;
+  background-size: cover;
+  overflow: hidden;
 }
 button {
   padding: 8px 35px;
@@ -81,17 +85,18 @@ button {
 }
 
 .columns-wrapper {
-  // background: url("./assets/background.jpg") no-repeat 100%;
-  background: #444000;
   display: flex;
   background-size: cover;
-  height: 763px;
+  flex-flow: row nowrap;
+  height: auto;
   padding: 20px;
   font-family: Montserrat;
   z-index: 1;
+  overflow-y: auto;
 }
 
 .column,
+.last-column,
 .new-column {
   order: 1;
   display: inline-table;
@@ -103,10 +108,11 @@ button {
   width: 272px;
 }
 
+.last-column {
+  order: 2;
+}
+
 .column {
-  &.last {
-    order: 2;
-  }
   &__title {
     font-size: 13px;
     font-weight: bold;
@@ -114,6 +120,12 @@ button {
     color: #111111;
     margin-bottom: 12px;
     position: relative;
+    input {
+      padding: 8px 12px;
+      width: calc(100% - 24px);
+      border: none;
+      border-radius: 3px;
+    }
   }
   &__notes {
     list-style: none;
