@@ -13,8 +13,4 @@ export function loadFromStorage() {
   return data && data.length ? JSON.parse(data) : [];
 }
 
-export function removeColumn(id) {
-  const data = loadFromStorage();
-  const filteredData = data.filter(col => col.id_col !== id);
-  saveToStorage(filteredData);
-}
+export const lastOrder = loadFromStorage().reduce((acc, cur) => cur.order > acc ? cur.order : acc, 0);

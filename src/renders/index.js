@@ -1,5 +1,5 @@
-import { createColumn, createNewColumn, createAddMoreColumn, createColumnControls } from "./createators";
-import { loadFromStorage } from './utilities';
+import { createColumn, createNewColumn, createAddMoreColumn, createColumnControls } from "../creators";
+import { loadFromStorage } from '../utilities';
 
 const root = document.getElementById("root");
 
