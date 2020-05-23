@@ -1,4 +1,4 @@
-import { removeColumnFromStorage, updateColumn } from '../utilities';
+import { removeColumnFromStorage, updateColumnInStorage } from '../utilities';
 import createRemove from './createRemove';
 import { renderColumns, renderColumnControls } from '../renders';
 
@@ -17,30 +17,29 @@ export default function createColumn(id_col, title, notes) {
     renderColumns();
   };
 
-  const editTitleHandler = () => {
-    header.removeEventListener('click', editTitleHandler);
-    const primaryHandler = ({ target }) => {
-      updateColumn(id_col, title, notes);
-      console.log(id_col, title, notes);
-      console.log('blur', target.value);
+  const primaryHandler = ({ target }) => {
+    updateColumnInStorage(id_col, target.value, notes);
+    renderColumns();
+  }
+
+  const handleKeysPress = (e, input) => {
+    const { key } = e || window.event;
+    if(key === 'Enter') {
+      input.blur();
+    }
+    if(key === 'Escape') {
       renderColumns();
     }
+  };
 
-    const handleKeysPress = (e) => {
-      const { key } = e || window.event;
-      if(key === 'Enter') {
-        primaryHandler()
-      }
-      if(key === 'Escape') {
-        renderColumns();
-      }
-    };
+  const editTitleHandler = (e) => {
+    header.removeEventListener('click', editTitleHandler);
 
     const input = document.createElement('input');
     input.setAttribute('type', 'text');
     input.setAttribute('value', title);
     input.addEventListener('blur', primaryHandler)
-    input.addEventListener('keydown', handleKeysPress);
+    input.addEventListener('keydown', (e) => handleKeysPress(e, input));
 
     header.innerHTML = '';
     header.appendChild(input);
@@ -52,7 +51,7 @@ export default function createColumn(id_col, title, notes) {
   const ul = document.createElement('ul');
   ul.classList.add('column__notes');
 
-  notes.forEach(({ id_note, content }) => {
+  [].forEach(({ id_note, content }) => {
     const li = document.createElement('li');
     li.setAttribute('id', `note-${id_note}`);
 

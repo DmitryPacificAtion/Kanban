@@ -23,14 +23,15 @@ export function removeColumnFromStorage(id) {
   localStorage.setItem('KANBAN-DATA', JSON.stringify(filteredData));
 }
 
-export function updateColumn(id, title, notes = []) {
+export function updateColumnInStorage(id, title, notes = []) {
   if(id && title) {
     const data = loadFromStorage();
-    const col = data.filter( item => item.id_col === id);
+    const col = data.filter( item => item.id_col === id)[0];
+    
     col.title = title;
     col.notes = notes;
-      
-    saveToStorage(data);
+    localStorage.setItem('KANBAN-DATA', JSON.stringify(data))
+    
   } else {
     console.error('Fields {id} and {title} must not be empty!')
   }
