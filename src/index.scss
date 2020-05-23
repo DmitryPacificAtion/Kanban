@@ -183,6 +183,9 @@ button {
     border-radius: 3px;
     padding: 8px 12px;
     margin-bottom: 8px;
+    &.error {
+      border: 1px solid red;
+    }
   }
   &__controls {
     display: flex;

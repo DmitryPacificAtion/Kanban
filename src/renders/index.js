@@ -13,7 +13,8 @@ function renderColumns() {
 function renderNewColumn() {
   const isExist = document.querySelector(".new-column");
   if (isExist === null) {
-    root.appendChild(createNewColumn());
+    const order = loadFromStorage().length;
+    root.appendChild(createNewColumn(order));
   } else {
     window.scrollTo(isExist);
   }

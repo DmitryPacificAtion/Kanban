@@ -1,4 +1,4 @@
-import removeColumn from './removeColumn';
+import { removeColumnFromStorage, updateColumn } from '../utilities';
 import createRemove from './createRemove';
 import { renderColumns, renderColumnControls } from '../renders';
 
@@ -13,17 +13,17 @@ export default function createColumn(id_col, title, notes) {
   header.innerHTML = title;
 
   const removeColumnHandler = () => {
-    removeColumn(id_col);
+    removeColumnFromStorage(id_col);
     renderColumns();
   };
 
   const editTitleHandler = () => {
     header.removeEventListener('click', editTitleHandler);
     const primaryHandler = ({ target }) => {
-      // updateColumn(id_col, title, notes);
-      // console.log(id_col, title, notes);
+      updateColumn(id_col, title, notes);
+      console.log(id_col, title, notes);
       console.log('blur', target.value);
-      // renderColumns();
+      renderColumns();
     }
 
     const handleKeysPress = (e) => {

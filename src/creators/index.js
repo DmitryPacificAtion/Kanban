@@ -2,9 +2,8 @@ import createAddMoreColumn from "./createAddMoreColumn";
 import createNewColumn from "./createNewColumn";
 import createColumn from "./createColumn";
 import createColumnControls from "./createColumnControls";
-import updateColumn from "./updateColumn";
 
-export { createAddMoreColumn, createNewColumn, createColumn, createColumnControls, updateColumn };
+export { createAddMoreColumn, createNewColumn, createColumn, createColumnControls };
 
 /* 
 function createNewColumnLegacy(referenceElement) {
