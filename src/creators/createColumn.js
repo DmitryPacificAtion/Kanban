@@ -1,5 +1,5 @@
 import { removeColumnFromStorage, updateColumnInStorage, makeHash } from '../utilities';
-import {createRemove, createNotes} from '.';
+import { createRemove, createNotes } from '.';
 import { renderColumns, renderColumnControls, renderNotes } from '../renders';
 
 export default function createColumn(id_col, title, notes) {
@@ -64,7 +64,7 @@ export default function createColumn(id_col, title, notes) {
     }
   };
 
-  textarea.addEventListener('keydown', handleKeysPress)
+  textarea.addEventListener('keydown', handleKeysPress);
 
   const button = document.createElement('button');
   const addButtonHandler = () => {
@@ -95,7 +95,7 @@ export default function createColumn(id_col, title, notes) {
       renderNotes(id_col);
       textarea.value = '';
     }
-  }
+  };
 
   const columnControlsSecondaryHandler = () => {
     wrapper.remove();
@@ -107,11 +107,11 @@ export default function createColumn(id_col, title, notes) {
     wrapper,
     'Добавить карточку',
     columnControlsPrimaryHandler,
-    columnControlsSecondaryHandler,
+    columnControlsSecondaryHandler
   );
 
   const el = document.getElementById(`add-card-${id_col}`);
-  if(el === null) {
+  if (el === null) {
     wrapper.remove();
     column.appendChild(button);
   } else {

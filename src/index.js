@@ -1,6 +1,6 @@
-import "./index.scss";
+import './index.scss';
 
-import { renderAddMoreColumn, renderColumns } from "./renders";
+import { renderAddMoreColumn, renderColumns } from './renders';
 
 (function () {
   renderColumns();

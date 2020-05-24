@@ -11,35 +11,35 @@ export default function createNewColumn(order) {
   input.setAttribute('placeholder', 'Введите название колонки');
   input.setAttribute('type', 'text');
   const primaryHandler = () => {
-    if(input.value) {
-    const newColumn = {
-      id_col: 'col-' + makeHash( input.value + Date.now()),
-      title: input.value,
-      order: order + 1,
-      notes: [],
-    }
-    saveToStorage(newColumn);
-    renderColumns();
-    column.remove();
+    if (input.value) {
+      const newColumn = {
+        id_col: 'col-' + makeHash(input.value + Date.now()),
+        title: input.value,
+        order: order + 1,
+        notes: [],
+      };
+      saveToStorage(newColumn);
+      renderColumns();
+      column.remove();
     } else {
-      input.placeholder = 'Поле не может быть пустым'
-      input.classList.add('error')
+      input.placeholder = 'Поле не может быть пустым';
+      input.classList.add('error');
     }
   };
   const secondaryHandler = () => column.remove();
   const handleKeysPress = (e) => {
     const { key } = e || window.event;
-    if(key === 'Enter') {
+    if (key === 'Enter') {
       primaryHandler();
     }
-    if(key === 'Escape') {
-      secondaryHandler()
+    if (key === 'Escape') {
+      secondaryHandler();
     }
   };
   input.addEventListener('keydown', handleKeysPress);
   column.appendChild(input);
   input.focus();
- 
+
   renderColumnControls(column, 'Добавить колонку', primaryHandler, secondaryHandler);
   return column;
 }
