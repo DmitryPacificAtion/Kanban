@@ -71,7 +71,7 @@ button {
   height: 15px;
   cursor: pointer;
   position: absolute;
-  top: 0;
+  top: calc(50% - 7px);
   left: calc(100% - 15px);
   z-index: 2;
   &:hover {
@@ -133,18 +133,29 @@ button {
     padding: 0;
     max-height: 657px; // x - 106px
     overflow-x: auto;
-    li {
-      box-shadow: 0px 1px 4px rgba(9, 45, 66, 0.25);
+    li,
+    input {
+      background: #fff;
+      padding: 8px 12px;
       border-radius: 3px;
+      box-shadow: 0px 1px 4px rgba(9, 45, 66, 0.25);
       margin-bottom: 8px;
-      input {
-        outline: none;
-        border: none;
-        border-radius: 3px;
-        width: calc(100% - 24px);
-        background-color: #fff;
-        padding: 8px 12px;
+      width: calc(100% - 24px);
+    }
+    li {
+      cursor: pointer;
+      position: relative;
+      .remove {
+        left: auto;
+        right: 10px;
       }
+      &:hover {
+        background: #f7f7f7;
+      }
+    }
+    input {
+      outline: none;
+      border: none;
     }
   }
   &__add-item {
