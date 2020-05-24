@@ -5,19 +5,16 @@ export default function createNewColumn(order) {
   const column = document.createElement('section');
   column.classList.add('new-column');
 
-  let inputText = '';
+  // TODO: validation
   const input = document.createElement('input');
   input.classList.add('new-column__input');
   input.setAttribute('placeholder', 'Введите название колонки');
   input.setAttribute('type', 'text');
-  const handleInputChange = ({ target }) => {
-    inputText = target.value;
-  };
   const primaryHandler = () => {
-    if(inputText) {
+    if(input.value) {
     const newColumn = {
-      id_col: 'col-' + makeHash( inputText + Date.now()),
-      title: inputText,
+      id_col: 'col-' + makeHash( input.value + Date.now()),
+      title: input.value,
       order: order + 1,
       notes: [],
     }
@@ -33,16 +30,15 @@ export default function createNewColumn(order) {
   const handleKeysPress = (e) => {
     const { key } = e || window.event;
     if(key === 'Enter') {
-      handleInputChange(e);
       primaryHandler();
     }
     if(key === 'Escape') {
       secondaryHandler()
     }
   };
-  input.addEventListener('change', handleInputChange);
   input.addEventListener('keydown', handleKeysPress);
   column.appendChild(input);
+  input.focus();
  
   renderColumnControls(column, 'Добавить колонку', primaryHandler, secondaryHandler);
   return column;
