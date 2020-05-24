@@ -57,6 +57,14 @@ export default function createColumn(id_col, title, notes) {
   textarea.setAttribute('placeholder', 'Введите название карточки');
   textarea.setAttribute('rows', '3');
   textarea.classList.add('new-column__input');
+  const handleKeysPress = (e) => {
+    const { key } = e || window.event;
+    if (key === 'Escape') {
+      columnControlsSecondaryHandler();
+    }
+  };
+
+  textarea.addEventListener('keydown', handleKeysPress)
 
   const button = document.createElement('button');
   const addButtonHandler = () => {
@@ -74,26 +82,32 @@ export default function createColumn(id_col, title, notes) {
   column.appendChild(header);
   column.appendChild(createNotes(id_col, notes));
 
+  const columnControlsPrimaryHandler = () => {
+    if (textarea.value) {
+      const note = {
+        id_col,
+        id_note: 'note-' + makeHash(textarea.value + Date.now()),
+        order: notes.length + 1,
+        content: textarea.value,
+      };
+      notes.push(note);
+      updateColumnInStorage(id_col, title, notes);
+      renderNotes(id_col);
+      textarea.value = '';
+    }
+  }
+
+  const columnControlsSecondaryHandler = () => {
+    wrapper.remove();
+    column.appendChild(button);
+    textarea.value = '';
+  };
+
   renderColumnControls(
     wrapper,
     'Добавить карточку',
-    () => {
-      if (textarea.value) {
-        const note = {
-          id_col,
-          id_note: 'note-' + makeHash(textarea.value + Date.now()),
-          order: notes.length + 1,
-          content: textarea.value,
-        };
-        notes.push(note);
-        updateColumnInStorage(id_col, title, notes);
-        renderNotes(id_col);
-      }
-    },
-    () => {
-      wrapper.remove();
-      column.appendChild(button);
-    },
+    columnControlsPrimaryHandler,
+    columnControlsSecondaryHandler,
   );
 
   const el = document.getElementById(`add-card-${id_col}`);

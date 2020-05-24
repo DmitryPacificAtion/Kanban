@@ -23,11 +23,21 @@ export function removeColumnFromStorage(id) {
   localStorage.setItem('KANBAN-DATA', JSON.stringify(filteredData));
 }
 
+export function removeNoteFromColumn(id_col, id_note) {
+  const data = loadFromStorage();
+  const foundColumn = data.filter(col => col.id_col === id_col)[0];
+  const filteredNotes = foundColumn.notes.filter(note => note.id_note !== id_note);
+  foundColumn.notes = filteredNotes;
+  const filteredData = data.filter(col => col.id_col !== id_col);
+  filteredData.push(foundColumn);
+  localStorage.setItem('KANBAN-DATA', JSON.stringify(filteredData));
+}
+
 export function updateColumnInStorage(id, title, notes = []) {
   if(id && title) {
     const data = loadFromStorage();
-    const col = data.filter( item => item.id_col === id)[0];
-    
+    const col = data.filter(item => item.id_col === id)[0];
+
     col.title = title;
     col.notes = notes;
     localStorage.setItem('KANBAN-DATA', JSON.stringify(data))
