@@ -2,7 +2,7 @@ import { removeColumnFromStorage, updateColumnInStorage, makeHash } from '../uti
 import { createRemove, createNotes } from '.';
 import { renderColumns, renderColumnControls, renderNotes } from '../renders';
 
-export default function createColumn(id_col, title, notes) {
+export default function createColumn(id_col, title, notes) { 
   // Creating a column
   const column = document.createElement('section');
   column.classList.add('column');

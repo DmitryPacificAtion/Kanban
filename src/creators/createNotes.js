@@ -1,11 +1,11 @@
 import { removeNoteFromColumn, updateNoteInColumn } from '../utilities';
 import createRemove from './createRemove';
-import { renderNotes } from '../renders';
+import { renderNotes, renderColumns } from '../renders';
 
 export default function createNotes(id_col, notes = []) {
   const removeNoteHandler = (id_note) => {
     removeNoteFromColumn(id_col, id_note);
-    renderNotes(id_col);
+    renderColumns();
   };
   const primaryHandler = ({ target }) => {
     updateNoteInColumn(id_col, id_note, target.value);
