@@ -2,6 +2,13 @@ const crypto = require('crypto');
 
 const isArray = (item) => item && typeof item !== 'string' && item.hasOwnProperty('length');
 
+const findColumn = (id) => loadFromStorage().filter(({ id_col }) => id_col === id)[0];
+const removeColumn = (id) => loadFromStorage().filter(({ id_col }) => id_col !== id);
+const findNote = (id_col, id_note) =>
+  findColumn(id_col).notes.filter((note) => note.id_note === id_note)[0];
+const filterNote = (id_col, id_note) =>
+  findColumn(id_col).notes.filter((note) => note.id_note !== id_note);
+
 export function makeHash(text) {
   return crypto.createHash('sha1').update(text).digest('hex');
 }
@@ -18,9 +25,7 @@ export function loadFromStorage() {
 }
 
 export function removeColumnFromStorage(id) {
-  const data = loadFromStorage();
-  const filteredData = data.filter((col) => col.id_col !== id);
-  localStorage.setItem('KANBAN-DATA', JSON.stringify(filteredData));
+  localStorage.setItem('KANBAN-DATA', JSON.stringify(removeColumn(id)));
 }
 
 export function removeNoteFromColumn(id_col, id_note) {
@@ -41,16 +46,17 @@ export function updateColumnInStorage(id, title, notes = []) {
     col.title = title;
     col.notes = notes;
     localStorage.setItem('KANBAN-DATA', JSON.stringify(data));
-  } else {
-    console.error('Fields {id} and {title} must not be empty!');
   }
 }
 
 export function updateNoteInColumn(id_col, id_note, content) {
-  const data = loadFromStorage();
-  const col = data.filter((item) => item.id_col === id)[0];
-  col.title = title;
-  col.notes = notes;
-  localStorage.setItem('KANBAN-DATA', JSON.stringify(data));
+  if (id_col && id_note && content) {
+    const data = loadFromStorage();
+    const col = data.filter((item) => item.id_col === id_col)[0];
+    const notes = col.notes.filter((note) => note.id_note === id_note);
+    notes[0].content = content;
+    col.notes = notes;
+    localStorage.setItem('KANBAN-DATA', JSON.stringify(data));
+  }
 }
 // export const lastOrder = loadFromStorage().reduce((acc, cur) => cur.order > acc ? cur.order : acc, 0);
