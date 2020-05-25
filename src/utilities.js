@@ -4,10 +4,6 @@ const isArray = (item) => item && typeof item !== 'string' && item.hasOwnPropert
 
 const findColumn = (id) => loadFromStorage().filter(({ id_col }) => id_col === id)[0];
 const removeColumn = (id) => loadFromStorage().filter(({ id_col }) => id_col !== id);
-const findNote = (id_col, id_note) =>
-  findColumn(id_col).notes.filter((note) => note.id_note === id_note)[0];
-const filterNote = (id_col, id_note) =>
-  findColumn(id_col).notes.filter((note) => note.id_note !== id_note);
 
 export function makeHash(text) {
   return crypto.createHash('sha1').update(text).digest('hex');
@@ -29,31 +25,33 @@ export function removeColumnFromStorage(id) {
 }
 
 export function removeNoteFromColumn(id_col, id_note) {
-  const data = loadFromStorage();
-  const foundColumn = data.filter((col) => col.id_col === id_col)[0];
-  const filteredNotes = foundColumn.notes.filter((note) => note.id_note !== id_note);
-  foundColumn.notes = filteredNotes;
-  const filteredData = data.filter((col) => col.id_col !== id_col);
-  filteredData.push(foundColumn);
-  localStorage.setItem('KANBAN-DATA', JSON.stringify(filteredData));
+  const col = findColumn(id_col);
+  col.notes = col.notes
+    .filter((note) => note.id_note !== id_note)
+    .map((note, index) => {
+      note.order = index + 1;
+      return note;
+    });
+  const newData = removeColumn(id_col);
+  newData.push(col);
+  localStorage.setItem('KANBAN-DATA', JSON.stringify(newData));
 }
 
-export function updateColumnInStorage(id, title, notes = []) {
-  if (id && title) {
-    const data = loadFromStorage();
-    const col = data.filter((item) => item.id_col === id)[0];
-
+export function updateColumnInStorage(id_col, title, notes = []) {
+  if (id_col && title) {
+    const col = findColumn(id_col);
+    const newData = removeColumn(id_col);
     col.title = title;
     col.notes = notes;
-    localStorage.setItem('KANBAN-DATA', JSON.stringify(data));
+    newData.push(col);
+    localStorage.setItem('KANBAN-DATA', JSON.stringify(newData));
   }
 }
 
-export function updateNoteInColumn(id_col, id_note, content) {  
+export function updateNoteInColumn(id_col, id_note, content) {
   if (id_col && id_note && content) {
-    const data = loadFromStorage();
-    const newData = data.filter((item) => item.id_col !== id_col);
-    const col = data.filter((item) => item.id_col === id_col)[0];
+    const col = findColumn(id_col);
+    const newData = removeColumn(id_col);
     col.notes.filter((note) => note.id_note === id_note)[0].content = content;
     newData.push(col);
     localStorage.setItem('KANBAN-DATA', JSON.stringify(newData));
