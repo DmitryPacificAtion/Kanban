@@ -49,14 +49,14 @@ export function updateColumnInStorage(id, title, notes = []) {
   }
 }
 
-export function updateNoteInColumn(id_col, id_note, content) {
+export function updateNoteInColumn(id_col, id_note, content) {  
   if (id_col && id_note && content) {
     const data = loadFromStorage();
+    const newData = data.filter((item) => item.id_col !== id_col);
     const col = data.filter((item) => item.id_col === id_col)[0];
-    const notes = col.notes.filter((note) => note.id_note === id_note);
-    notes[0].content = content;
-    col.notes = notes;
-    localStorage.setItem('KANBAN-DATA', JSON.stringify(data));
+    col.notes.filter((note) => note.id_note === id_note)[0].content = content;
+    newData.push(col);
+    localStorage.setItem('KANBAN-DATA', JSON.stringify(newData));
   }
 }
 // export const lastOrder = loadFromStorage().reduce((acc, cur) => cur.order > acc ? cur.order : acc, 0);

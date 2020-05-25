@@ -11,8 +11,10 @@ const root = document.getElementById('root');
 
 function renderColumns() {
   Object.values(document.querySelectorAll('.column')).forEach((item) => item.remove());
-  loadFromStorage().forEach(({ id_col, title, notes }) =>
+  loadFromStorage().forEach(({ id_col, title, notes }) =>{
+    console.log('2', notes);
     root.appendChild(createColumn(id_col, title, notes))
+  }
   );
 }
 

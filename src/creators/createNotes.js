@@ -10,7 +10,7 @@ export default function createNotes(id_col, notes = []) {
   const primaryHandler = ({ target }, id_note) => {
     if(target.value) {
       updateNoteInColumn(id_col, id_note, target.value);
-      renderNotes(id_col);
+      renderColumns();
     } else {
       target.classList.add('error');
       target.placeholder = 'Поле не может быть пустым'
@@ -23,7 +23,6 @@ export default function createNotes(id_col, notes = []) {
 
   notes.forEach(({ id_note, content }) => {
     const editNoteHandler = (e) => {
-      console.log('editNoteHandler', e.target);
       li.removeEventListener('click', editNoteHandler);
       li.innerHTML = '';
       li.classList.add('note__item--write');
