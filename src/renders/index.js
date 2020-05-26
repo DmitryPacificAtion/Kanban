@@ -25,14 +25,15 @@ function renderColumns() {
   });
 
   let droppableOrigin;
+  let id_colOrigin;
+  let id_noteOrigin;
 
   // --- Draggable events --- //
   droppable.on('drag:start', (e) => {
     e.data.originalSource.style.display = 'none';
     droppableOrigin = e.data.originalSource.parentNode;
-    const id_col = e.data.originalSource.parentNode.parentNode.getAttribute('id');
-    const id_note = e.data.originalSource.getAttribute('id');
-    removeNoteFromColumn(id_col, id_note);
+    id_colOrigin = e.data.originalSource.parentNode.parentNode.getAttribute('id');
+    id_noteOrigin = e.data.originalSource.getAttribute('id');
   });
 
   droppable.on('droppable:stop', (e) => {
@@ -46,6 +47,7 @@ function renderColumns() {
         content: item.innerText,
       }));
       updateColumnInStorage(id_col, dropzone.previousSibling.innerText, notes);
+      removeNoteFromColumn(id_colOrigin, id_noteOrigin);
       renderColumns();
     }
   });

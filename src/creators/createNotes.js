@@ -26,6 +26,7 @@ export default function createNotes(id_col, notes = []) {
     const editNoteHandler = (e) => {
       li.removeEventListener('click', editNoteHandler);
       li.innerHTML = '';
+      li.classList.remove('note__item');
       li.classList.add('note__item--write');
       li.appendChild(input);
       input.focus();
