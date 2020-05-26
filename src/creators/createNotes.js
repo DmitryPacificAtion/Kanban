@@ -1,5 +1,4 @@
 import { removeNoteFromColumn, updateNoteInColumn } from '../utilities';
-import { Droppable } from '@shopify/draggable';
 import createRemove from './createRemove';
 import { renderColumns } from '../renders';
 import createEdit from './createEdit';
@@ -22,30 +21,6 @@ export default function createNotes(id_col, notes = []) {
   // Creating Notes list
   const ul = document.createElement('ul');
   ul.classList.add('column__notes');
-  const droppable = new Droppable(ul, {
-    draggable: 'li',
-    dropzone: 'ul',
-  });
-
-  let tempOrder;
-  let droppableOrigin;
-
-  // --- Draggable events --- //
-  droppable.on('drag:start', (e) => {
-    droppableOrigin = e.originalSource.parentNode.dataset.dropzone;
-    tempOrder = e.originalSource.attributes['data-order'].value;
-  });
-  droppable.on('drag:over', (e) => {
-    e.data.source = e.data.over + 1;
-  });
-  droppable.on('drag:stop', (e) => {
-    tempOrder = e.originalSource.attributes['data-order'].value;
-  });
-  droppable.on('droppable:dropped', (e) => {
-    if (droppableOrigin !== e.dropzone.dataset.dropzone) {
-      e.cancel();
-    }
-  });
 
   notes.forEach(({ id_note, order, content }) => {
     const editNoteHandler = (e) => {

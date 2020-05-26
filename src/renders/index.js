@@ -5,15 +5,56 @@ import {
   createColumnControls,
   createNotes,
 } from '../creators';
-import { loadFromStorage } from '../utilities';
+import { loadFromStorage, updateColumnInStorage, removeNoteFromColumn } from '../utilities';
+import { Droppable } from '@shopify/draggable';
 
 const root = document.getElementById('root');
 
 function renderColumns() {
   Object.values(document.querySelectorAll('.column')).forEach((item) => item.remove());
-  loadFromStorage().forEach(({ id_col, title, notes }) =>
-    root.appendChild(createColumn(id_col, title, notes))
-  );
+  const data = loadFromStorage();
+  data.sort((p, n) => p.order - n.order);
+  data.forEach(({ id_col, title, notes }) => root.appendChild(createColumn(id_col, title, notes)));
+
+  const droppable = new Droppable(document.querySelectorAll('.column'), {
+    draggable: '.note__item',
+    dropzone: '.column__notes',
+    mirror: {
+      constrainDimensions: true,
+    },
+  });
+
+  let droppableOrigin;
+
+  // --- Draggable events --- //
+  droppable.on('drag:start', (e) => {
+    e.data.originalSource.style.display = 'none';
+    droppableOrigin = e.data.originalSource.parentNode;
+    const id_col = e.data.originalSource.parentNode.parentNode.getAttribute('id');
+    const id_note = e.data.originalSource.getAttribute('id');
+    removeNoteFromColumn(id_col, id_note);
+  });
+
+  droppable.on('droppable:stop', (e) => {
+    const { dropzone } = e;
+    if (droppableOrigin !== dropzone) {
+      const id_col = dropzone.parentNode.getAttribute('id');
+      const notes = Object.values(dropzone.childNodes).map((item) => ({
+        id_col,
+        id_note: item.getAttribute('id'),
+        order: parseInt(item.dataset.order, 10),
+        content: item.innerText,
+      }));
+      updateColumnInStorage(id_col, dropzone.previousSibling.innerText, notes);
+      renderColumns();
+    }
+  });
+
+  droppable.on('droppable:dropped', (e) => {
+    if (droppableOrigin === e.dropzone) {
+      e.cancel();
+    }
+  });
 }
 
 function renderNotes(id_col) {

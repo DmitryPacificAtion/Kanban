@@ -34,6 +34,7 @@ export function removeNoteFromColumn(id_col, id_note) {
     });
   const newData = removeColumn(id_col);
   newData.push(col);
+  newData.sort((p, n) => p.order - n.order);
   localStorage.setItem('KANBAN-DATA', JSON.stringify(newData));
 }
 
@@ -44,6 +45,7 @@ export function updateColumnInStorage(id_col, title, notes = []) {
     col.title = title;
     col.notes = notes;
     newData.push(col);
+    newData.sort((p, n) => p.order - n.order);
     localStorage.setItem('KANBAN-DATA', JSON.stringify(newData));
   }
 }
@@ -54,6 +56,7 @@ export function updateNoteInColumn(id_col, id_note, content) {
     const newData = removeColumn(id_col);
     col.notes.filter((note) => note.id_note === id_note)[0].content = content;
     newData.push(col);
+    newData.sort((p, n) => p.order - n.order);
     localStorage.setItem('KANBAN-DATA', JSON.stringify(newData));
   }
 }
