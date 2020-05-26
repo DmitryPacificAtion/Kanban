@@ -45,10 +45,6 @@
 
 body {
   margin: 0;
-  background: url('./assets/background2.jpg') no-repeat 100%;
-  height: 980px;
-  background-size: cover;
-  overflow-x: hidden;
 }
 button {
   padding: 8px 35px;
@@ -59,6 +55,19 @@ button {
   font-size: 13px;
   line-height: 146%;
   border-radius: 3px;
+}
+
+.wallpaper {
+  background: url('./assets/background.jpg') no-repeat 0 0;
+  width: 100%;
+  background-size: cover;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  // left: 0;
+  // right: 0;
+  z-index: 1;
 }
 
 .none {
@@ -92,7 +101,7 @@ button {
   position: absolute;
   top: calc(50% - 7px);
   left: calc(100% - 15px);
-  z-index: 2;
+  z-index: 3;
   &:hover {
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMzQ2LjY0NSAzNDYuNjQ1IiBmaWxsPSIjMzMzMzMzIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMzM2Ljc1NCwyNi4xOTZMMzE5LjQ0NSw4Ljg4N2MtNi4xODEtNC45NDYtMTMuNi04LjY1NS0yMS4wMTgtOC42NTVjLTQuOTQ1LDAtOS44OTEsMi40NzMtMTMuNiw2LjE4MmwtMTYuMDcyLDE2LjA3MgoJCQlsLTcuNDE4LDcuNDE4TDE5LjAwOSwyNzAuOTk1Yy0xLjIzNiwxLjIzNy0yLjQ3MywzLjcwOS0zLjcwOSw0Ljk0NWwtMTQuODM2LDU0LjRjLTEuMjM3LDMuNzA5LDAsOC42NTUsMy43MDksMTIuMzY0CgkJCWMyLjQ3MywyLjQ3Myw0Ljk0NSwzLjcwOSw4LjY1NSwzLjcwOWMxLjIzNiwwLDIuNDczLDAsMy43MDksMGw1NC40LTE0LjgzNmMyLjQ3MywwLDMuNzA5LTEuMjM3LDQuOTQ1LTMuNzA5TDMxOC4yMDksODUuNTQxCgkJCWw3LjQxOC03LjQxOGwxNi4wNzItMTYuMDczYzIuNDczLTIuNDcyLDQuOTQ1LTcuNDE3LDQuOTQ1LTEzLjU5OUMzNDYuNjQ1LDQxLjAzMiwzNDIuOTM2LDMzLjYxNCwzMzYuNzU0LDI2LjE5NnogTTYxLjA0NSwzMDguMDg2CgkJCWwtMjkuNjczLDguNjU1bDguNjU0LTI5LjY3M0wyNjkuOTksNTQuNjMybDIyLjI1NSwyMi4yNTVMNjEuMDQ1LDMwOC4wODZ6IE0zMDkuNTU0LDU5LjU3N2wtMjIuMjU1LTIyLjI1NWwxMi4zNjQtMTIuMzY0CgkJCWMxLjIzNywwLDEuMjM3LDEuMjM2LDIuNDczLDIuNDczbDE3LjMwOSwxNy4zMDljMS4yMzcsMS4yMzYsMS4yMzcsMi40NzMsMi40NzMsMi40NzNMMzA5LjU1NCw1OS41Nzd6Ii8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+');
     opacity: 0.75;
@@ -104,13 +113,16 @@ button {
 }
 
 .columns-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 10px;
+  right: 0;
   display: flex;
-  background-size: cover;
   flex-flow: row nowrap;
-  height: auto;
   padding: 20px;
   font-family: Montserrat;
-  z-index: 1;
+  z-index: 2;
   overflow-y: auto;
 }
 
@@ -124,7 +136,8 @@ button {
   margin-right: 12px;
   border-radius: 3px;
   padding: 8px 12px;
-  width: 272px;
+  flex: 1 0 272px;
+  z-index: 2;
 }
 
 .last-column {
@@ -150,7 +163,7 @@ button {
     list-style: none;
     margin: 0;
     padding: 0;
-    max-height: 657px; // x - 106px
+    max-height: 516px;
     overflow-x: auto;
   }
   &__add-item {
@@ -179,7 +192,8 @@ button {
 }
 .note__item {
   &,
-  input {
+  input,
+  &--write {
     background: #fff;
     padding: 8px 12px;
     border-radius: 3px;
@@ -193,7 +207,7 @@ button {
     padding-right: 55px;
     text-overflow: ellipsis;
     overflow: hidden;
-    z-index: 2;
+    z-index: 3;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -213,14 +227,13 @@ button {
     }
   }
   &--write {
-    padding: 0;
     box-shadow: none;
     width: auto;
-  }
-  input {
-    outline: none;
-    border: none;
-    width: 268px;
+    input {
+      outline: none;
+      border: none;
+      width: 247px;
+    }
   }
 }
 
