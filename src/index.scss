@@ -345,6 +345,10 @@ button {
       border-color: #535353;
       background-color: #ffffff;
       color: #535353;
+      &[disabled] {
+        background-color: #eeeeee;
+        cursor: not-allowed;
+      }
     }
   }
   &__sign-wrapper {
