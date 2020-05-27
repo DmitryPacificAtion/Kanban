@@ -4,6 +4,7 @@ import {
   createAddMoreColumn,
   createColumnControls,
   createNotes,
+  createAuth,
 } from '../creators';
 import { loadFromStorage, updateColumnInStorage, removeNoteFromColumn } from '../utilities';
 import { Droppable } from '@shopify/draggable';
@@ -91,4 +92,8 @@ function renderColumnControls(parent, label, primaryHandler, secondaryHandler) {
   parent.appendChild(createColumnControls(label, primaryHandler, secondaryHandler));
 }
 
-export { renderColumns, renderNewColumn, renderAddMoreColumn, renderColumnControls, renderNotes };
+function renderAuth() {
+  root.appendChild(createAuth())
+}
+
+export { renderColumns, renderNewColumn, renderAddMoreColumn, renderColumnControls, renderNotes, renderAuth };

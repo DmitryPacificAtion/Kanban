@@ -5,6 +5,7 @@ import createColumnControls from './createColumnControls';
 import createNotes from './createNotes';
 import createRemove from './createRemove';
 import createEdit from './createEdit';
+import createAuth from './createAuth';
 
 export {
   createAddMoreColumn,
@@ -14,4 +15,5 @@ export {
   createNotes,
   createRemove,
   createEdit,
+  createAuth,
 };

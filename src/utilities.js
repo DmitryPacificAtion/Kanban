@@ -17,7 +17,9 @@ export function saveToStorage(data) {
 
 export function loadFromStorage() {
   const data = JSON.parse(localStorage.getItem('KANBAN-DATA'));
-  return isArray(data) ? data : [];
+  if(data !== null && isArray(data)) {
+    return data
+  }
 }
 
 export function removeColumnFromStorage(id) {
