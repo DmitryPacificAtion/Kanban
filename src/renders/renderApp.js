@@ -1,10 +1,10 @@
-import { renderHeader, renderColumns, renderAddMoreColumn } from '.';
+import { renderHeaderPanel, renderColumns, renderAddMoreColumn } from '.';
 import root from './root';
 
 export default function renderApp(userName, signOutHandler) {
   root.innerHTML = null;
 
-  renderHeader(userName, signOutHandler);
+  renderHeaderPanel(userName, signOutHandler);
   renderColumns();
   renderAddMoreColumn();
 }
