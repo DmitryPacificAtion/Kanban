@@ -6,6 +6,7 @@ import createNotes from './createNotes';
 import createRemove from './createRemove';
 import createEdit from './createEdit';
 import createAuth from './createAuth';
+import createHeaderPanel from './createHeaderPanel';
 
 export {
   createAddMoreColumn,
@@ -16,4 +17,5 @@ export {
   createRemove,
   createEdit,
   createAuth,
+  createHeaderPanel,
 };

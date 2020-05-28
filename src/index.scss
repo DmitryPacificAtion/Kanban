@@ -46,6 +46,7 @@
 body {
   margin: 0;
 }
+
 button {
   padding: 8px 35px;
   font-family: Montserrat;
@@ -119,7 +120,7 @@ button {
   right: 0;
   display: flex;
   flex-flow: row nowrap;
-  padding: 20px;
+  padding: 50px 20px 20px;
   font-family: Montserrat;
   overflow-y: auto;
   z-index: 1;
@@ -192,6 +193,7 @@ button {
     }
   }
 }
+
 .note__item {
   &,
   input,
@@ -354,5 +356,32 @@ button {
   &__sign-wrapper {
     display: flex;
     justify-content: space-around;
+  }
+}
+
+.login {
+  height: 40px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  background: #dfe3e6;
+  width: 100%;
+  padding: 0 20px;
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+  &__user {
+    color: #333333;
+    margin-right: 20px;
+  }
+  &__signout {
+    padding: 5px 12px;
+    border: 1px solid #007bff;
+    background: #007bff;
+    color: #ffffff;
+    cursor: pointer;
   }
 }

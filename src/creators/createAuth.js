@@ -4,7 +4,6 @@ export default function createAuth() {
   auth.classList.add('auth-container');
 
   const firebaseContainer = document.createElement('form');
-  // firebaseContainer.setAttribute('id', 'firebaseui-auth-container');
   firebaseContainer.classList.add('auth');
   firebaseContainer.addEventListener('submit', e => {
     e.preventDefault();

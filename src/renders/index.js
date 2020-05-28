@@ -5,6 +5,7 @@ import {
   createColumnControls,
   createNotes,
   createAuth,
+  createHeaderPanel,
 } from '../creators';
 import { loadFromStorage, updateColumnInStorage, removeNoteFromColumn } from '../utilities';
 import { Droppable } from '@shopify/draggable';
@@ -92,8 +93,22 @@ function renderColumnControls(parent, label, primaryHandler, secondaryHandler) {
   parent.appendChild(createColumnControls(label, primaryHandler, secondaryHandler));
 }
 
+function renderHeader(userName, signOutHandler) {
+  root.appendChild(createHeaderPanel(userName, signOutHandler));
+}
+
 function renderAuth() {
+  root.innerHTML = null;
+
   root.appendChild(createAuth())
 }
 
-export { renderColumns, renderNewColumn, renderAddMoreColumn, renderColumnControls, renderNotes, renderAuth };
+function renderApp(userName, signOutHandler) {
+  root.innerHTML = null;
+
+  renderHeader(userName, signOutHandler)
+  renderColumns();
+  renderAddMoreColumn();
+}
+
+export { renderColumns, renderNewColumn, renderAddMoreColumn, renderColumnControls, renderNotes, renderAuth, renderApp };
