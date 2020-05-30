@@ -3,10 +3,11 @@ const firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/firestore');
 import config from '../firebase-config';
-import { renderApp, renderAuth } from './renders';
+import { renderApp, renderAuth, isLoaderVisible } from './renders';
 import { createStorage } from './utilities';
 
 (function () {
+  isLoaderVisible(true)
   initApp();
 })();
 
@@ -22,6 +23,7 @@ function initApp() {
           if (doc && doc.exists) {
             createStorage(doc.data().data);
             renderApp(user.email, () => firebase.auth().signOut());
+            isLoaderVisible(false);
           } else {
             docRef.set({
               data: [],
@@ -40,6 +42,7 @@ function initApp() {
         });
     } else {
       renderAuth();
+      isLoaderVisible(false);
     }
   });
 }

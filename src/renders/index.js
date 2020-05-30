@@ -6,6 +6,7 @@ import renderColumnControls from './renderColumnControls';
 import renderHeaderPanel from './renderHeaderPanel';
 import renderAuth from './renderAuth';
 import renderApp from './renderApp';
+import isLoaderVisible from './isLoaderVisible';
 
 
 export {
@@ -17,4 +18,5 @@ export {
   renderAuth,
   renderHeaderPanel,
   renderApp,
+  isLoaderVisible
 };

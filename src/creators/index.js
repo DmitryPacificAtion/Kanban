@@ -7,6 +7,7 @@ import createRemove from './createRemove';
 import createEdit from './createEdit';
 import createAuth from './createAuth';
 import createHeaderPanel from './createHeaderPanel';
+import createSpinner from './createSpinner';
 
 export {
   createAddMoreColumn,
@@ -18,4 +19,5 @@ export {
   createEdit,
   createAuth,
   createHeaderPanel,
+  createSpinner,
 };
