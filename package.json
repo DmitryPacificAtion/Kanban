@@ -1,6 +1,6 @@
 {
   "name": "Kanban",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "My test project",
   "repository": "https://github.com/DmitryPacificAtion/kanban.git",
   "author": "Dmitry Bruslik",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode=development --history-api-fallback --inline --progress --open",
-    "build": "webpack-cli --mode=production"
+    "build": "webpack-cli"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -36,6 +36,6 @@
   "dependencies": {
     "@shopify/draggable": "^1.0.0-beta.8",
     "firebase": "^7.14.5",
-    "firebaseui": "^4.5.0"
+    "imagemin-webpack-plugin": "^2.4.2"
   }
 }
