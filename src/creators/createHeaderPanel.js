@@ -1,4 +1,11 @@
-export default function createHeaderPanel(userName, signOutHandler) {
+import { killLocalStorage } from "../utilities";
+
+export default function createHeaderPanel(userName, handleSignOut) {
+  const signOutHandler = () => {
+    handleSignOut();
+    killLocalStorage();
+  };
+  
   const header = document.createElement('header');
   header.classList.add('login');
 

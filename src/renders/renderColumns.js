@@ -6,7 +6,12 @@ import { loadFromStorage, updateColumnInStorage, removeNoteFromColumn } from '..
 export default function renderColumns() {
   Object.values(document.querySelectorAll('.column')).forEach((item) => item.remove());
   const data = loadFromStorage();
-  data.sort((p, n) => p.order - n.order);
+  data.sort((p, n) => {
+    if (p && p.order && n && n.order) {
+      return p.order - n.order;
+    }
+    return false;
+  });
   data.forEach(({ id_col, title, notes }) => root.appendChild(createColumn(id_col, title, notes)));
 
   const droppable = new Droppable(document.querySelectorAll('.column'), {

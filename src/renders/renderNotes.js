@@ -1,4 +1,5 @@
 import { createNotes } from '../creators';
+import { loadFromStorage } from '../utilities';
 
 export default function renderNotes(id_col) {
   if (id_col) {

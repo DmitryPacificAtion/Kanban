@@ -84,8 +84,6 @@ export default function createAuth() {
   firebaseContainer.appendChild(resetPasw);
 
   const toggleSignIn = () => {
-    console.log('currentUser', firebase.auth().currentUser);
-    
     if (firebase.auth().currentUser) {
       firebase.auth().signOut();
     } else {
@@ -102,10 +100,6 @@ export default function createAuth() {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(result => {
-          console.log('result', result);
-          return result;
-        })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
